@@ -66,12 +66,5 @@ function parse () {
       buf = new Buffer(dif)
       chunk.copy(buf, 0, len - dif)
     }
-
-    function read (chunkLength, fn) {
-      if (len - offset >= chunkLength) {
-        fn();
-        offset += chunkLength;
-      }
-    }
   });
 }
