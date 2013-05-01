@@ -1,6 +1,8 @@
 
 # level-rpc
 
+[![Build Status](https://travis-ci.org/juliangruber/level-rpc.png?branch=master)](https://travis-ci.org/juliangruber/level-rpc)
+
 ## Protocol
 
 ```
