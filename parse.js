@@ -6,11 +6,15 @@ function parse () {
   var buf = null;
   var offset = 0;
 
-  var method, keyLength, key, valueLength, value;
+  var id, method, keyLength, key, valueLength, value;
 
   function reset () {
+    id = null;
     method = null;
-    offset = 0;
+    keyLength = null;
+    key = null;
+    valueLength = null;
+    value = null;
   }
 
   return through(function (chunk) {
@@ -22,7 +26,13 @@ function parse () {
     }
 
     while (true) {
-      if (!method) {
+      if (id === null) {
+        if (len < 3 + offset) break;
+        id = chunk.readUInt32LE(offset);
+        offset += 3;
+      }
+
+      if (method === null) {
         if (len < 1 + offset) break;
         method = chunk.readUInt8(offset) == 0
           ? 'get'
@@ -30,33 +40,33 @@ function parse () {
         offset += 1;
       }
 
-      if (!keyLength) {
+      if (keyLength === null) {
         if (len < 1 + offset) break;
         keyLength = chunk.readUInt8(offset);
         offset += 1;
       }
 
-      if (!key) {
+      if (key === null) {
         if (len < keyLength + offset) break;
         var keyEnd = keyLength + offset;
         key = chunk.toString('utf8', offset, keyEnd);
         offset = keyEnd;
       }
 
-      if (!valueLength && method === 'post') {
+      if (valueLength === null && method === 'post') {
         if (len < 1 + offset) break;
         valueLength = chunk.readUInt8(offset);
         offset += 1;
       }
 
-      if (!value && method === 'post') {
+      if (value === null && method === 'post') {
         if (len < valueLength + offset) break;
         var valueEnd = valueLength + offset;
         value = chunk.toString('utf8', offset, valueEnd);
         offset = valueEnd;
       }
 
-      this.queue(method, key, value);
+      this.queue(id, method, key, value);
 
       reset();
     }
@@ -66,5 +76,7 @@ function parse () {
       buf = new Buffer(dif)
       chunk.copy(buf, 0, len - dif)
     }
+
+    offset = 0;
   });
 }

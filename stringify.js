@@ -4,11 +4,12 @@ module.exports = stringify;
  * Create Buffer to be sent over the wire.
  */
 
-function stringify (method, key, value) {
+function stringify (id, method, key, value) {
   var keyLength = key.length;
   var valueLength = value.length;
 
-  var length = 2 + keyLength;
+  // 5 = method + 3x callback id + key length
+  var length = 5 + keyLength;
 
   if (method === 'put') {
     length += 1 + valueLength
@@ -16,13 +17,14 @@ function stringify (method, key, value) {
 
   var buf = new Buffer(length);
 
-  buf.writeUInt8(method == 'put');
-  buf.writeUInt8(keyLength, 1);
-  buf.write(key, 2);
+  buf.writeUInt32LE(id);
+  buf.writeUInt8(method == 'put', 3);
+  buf.writeUInt8(keyLength, 4);
+  buf.write(key, 5);
 
   if (method === 'put') {
-    buf.writeUInt8(valueLength, 2 + keyLength);
-    buf.write(value, 2 + keyLength + 1);
+    buf.writeUInt8(valueLength, 5 + keyLength);
+    buf.write(value, 5 + keyLength + 1);
   }
 
   return buf;
