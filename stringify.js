@@ -6,13 +6,14 @@ module.exports = stringify;
 
 function stringify (id, method, key, value) {
   var keyLength = key.length;
-  var valueLength = value.length;
+  var valueLength;
 
   // 5 = method + 3x callback id + key length
   var length = 5 + keyLength;
 
   if (method === 'put') {
-    length += 1 + valueLength
+    valueLength = value.length;
+    length += 1 + valueLength;
   }
 
   var buf = new Buffer(length);
