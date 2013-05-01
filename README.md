@@ -4,7 +4,7 @@
 ## Protocol
 
 ```
-| LENGTH | 0     | KEY    | (Value) |
-| UINT8  | GET=0 | Buffer | Buffer  |
-|        | PUT=1 |        |         |
+| METHOD | KEY LENGTH | KEY    | (VALUE LENGTH) | (Value) |
+| GET=0  | UINT8      | UTF8   | UINT8          | UTF8    |
+| PUT=1  |            |        |                |         |
 ```
