@@ -7,7 +7,7 @@ Super fast rpc mechanism for LevelUp
 
 ## Motivation
 
-[multilevel](https://github.com/juliangruber/multilevel) is nice but slow and doesn't support binary data. Instead of going after feature parity first this module is all about speed and binary support, where feature parity with [levelup](https://github.com/rvagg/node-levelup) would come later.
+[multilevel](https://github.com/juliangruber/multilevel) is nice but slow and doesn't support binary data. Instead of going after feature parity first this module is all about speed and binary support, feature parity with [levelup](https://github.com/rvagg/node-levelup) will come later.
 
 ## Protocol
 
