@@ -36,7 +36,7 @@ function parse () {
 
       if (method === null) {
         if (len < 1 + offset) break;
-        method = chunk.readUInt8(offset) == 0
+        method = chunk.readUInt8(offset) === 0
           ? 'get'
           : 'put';
         offset += 1;
