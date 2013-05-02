@@ -17,6 +17,8 @@ function parse () {
     value = null;
   }
 
+  reset();
+
   return through(function (chunk) {
     var len = chunk.length;
 
@@ -27,9 +29,9 @@ function parse () {
 
     while (true) {
       if (id === null) {
-        if (len < 3 + offset) break;
+        if (len < 4 + offset) break;
         id = chunk.readUInt32LE(offset);
-        offset += 3;
+        offset += 4;
       }
 
       if (method === null) {
@@ -53,20 +55,20 @@ function parse () {
         offset = keyEnd;
       }
 
-      if (valueLength === null && method === 'post') {
+      if (valueLength === null && method === 'put') {
         if (len < 1 + offset) break;
         valueLength = chunk.readUInt8(offset);
         offset += 1;
       }
 
-      if (value === null && method === 'post') {
+      if (value === null && method === 'put') {
         if (len < valueLength + offset) break;
         var valueEnd = valueLength + offset;
         value = chunk.toString('utf8', offset, valueEnd);
         offset = valueEnd;
       }
 
-      this.queue(id, method, key, value);
+      this.queue([id, method, key, value]);
 
       reset();
     }
