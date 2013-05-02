@@ -10,7 +10,7 @@ Super fast rpc mechanism for LevelUp
 * `[X]` stringify
 * `[ ]` parse
 * `[X]` string encoding
-* `[X]` buffer encoding
+* `[ ]` buffer encoding
 * `[ ]` rpc server
 * `[ ]` rpc client
 * `[ ]` `db#get(key, cb)`
