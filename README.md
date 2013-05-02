@@ -26,7 +26,8 @@ Super fast rpc mechanism for LevelUp
 ## Protocol
 
 ```
-| METHOD | CALLBACK ID | KEY LENGTH | KEY    | (VALUE LENGTH) | (Value) |
-| GET=0  | UINT32      | UINT8      | UTF8   | UINT8          | UTF8    |
-| PUT=1  |             |            |        |                |         |
+| METHOD | CB/STR ID | KEYLENGTH | KEY  | VALUELENGTH | Value |
+| UINT8  | UINT32    | UINT8     | UTF8 | UINT8       | UTF8  |
+| GET=0  |           |           |      |             |       |
+| PUT=1  |           |           |      |             |       |
 ```
