@@ -1,5 +1,6 @@
 var stringify = require('../stringify');
 var stringifyBuf = stringify.buffer;
+var Buffer = require('buffer').Buffer;
 var test = require('tape');
 
 test('stringify str: get', function (t) {

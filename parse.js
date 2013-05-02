@@ -1,4 +1,5 @@
 var through = require('through');
+var Buffer = require('buffer').Buffer;
 
 module.exports = parse;
 
