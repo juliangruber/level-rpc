@@ -5,6 +5,8 @@ Super fast rpc mechanism for LevelUp
 
 [![Build Status](https://travis-ci.org/juliangruber/level-rpc.png?branch=master)](https://travis-ci.org/juliangruber/level-rpc)
 
+[![browser support](https://ci.testling.com/juliangruber/level-rpc.png)](https://ci.testling.com/juliangruber/level-rpc)
+
 ## Status
 
 * `[X]` stringify
