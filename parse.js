@@ -55,17 +55,19 @@ function parse () {
         offset = keyEnd;
       }
 
-      if (valueLength === null && method === 'put') {
-        if (len < 1 + offset) break;
-        valueLength = chunk.readUInt8(offset);
-        offset += 1;
-      }
+      if (method === 'put') {
+        if (valueLength === null) {
+          if (len < 1 + offset) break;
+          valueLength = chunk.readUInt8(offset);
+          offset += 1;
+        }
 
-      if (value === null && method === 'put') {
-        if (len < valueLength + offset) break;
-        var valueEnd = valueLength + offset;
-        value = chunk.toString('utf8', offset, valueEnd);
-        offset = valueEnd;
+        if (value === null) {
+          if (len < valueLength + offset) break;
+          var valueEnd = valueLength + offset;
+          value = chunk.toString('utf8', offset, valueEnd);
+          offset = valueEnd;
+        }
       }
 
       this.queue([id, method, key, value]);
