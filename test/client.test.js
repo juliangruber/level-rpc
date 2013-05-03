@@ -9,8 +9,8 @@ test('client get', function (t) {
   var rpcStream = db.createRPCStream();
   
   rpcStream.on('data', function (chunk) {
-    t.equals(chunk.toString(), stringify(1, 0, ['foo']).toString(), 'out');
-    rpcStream.write(stringify(0, 0, [undefined, 'bar']));
+    t.equals(chunk.toString(), stringify(1, 1, ['foo']).toString(), 'out');
+    rpcStream.write(stringify(0, 1, [undefined, 'bar']));
   });
 
   db.get('foo', function (err, value) {
@@ -28,10 +28,10 @@ test('client put', function (t) {
   rpcStream.on('data', function (chunk) {
     t.equals(
       chunk.toString(),
-      stringify(2, 0, ['foo', 'bar']).toString(),
+      stringify(2, 1, ['foo', 'bar']).toString(),
       'out'
     );
-    rpcStream.write(stringify(0, 0, []));
+    rpcStream.write(stringify(0, 1, []));
   });
 
   db.put('foo', 'bar', function (err) {
@@ -48,10 +48,10 @@ test('client del', function (t) {
   rpcStream.on('data', function (chunk) {
     t.equals(
       chunk.toString(),
-      stringify(3, 0, ['foo']).toString(),
+      stringify(3, 1, ['foo']).toString(),
       'out'
     );
-    rpcStream.write(stringify(0, 0, []));
+    rpcStream.write(stringify(0, 1, []));
   });
 
   db.del('foo', function (err) {
