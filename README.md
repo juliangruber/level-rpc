@@ -70,18 +70,23 @@ Super fast rpc mechanism for LevelUp
 ## Benchmarks
 
 ```bash
- ∴  bench (master) : node stringify.bench.js 
-stringify str:     get x 816,181 ops/sec ±0.39% (96 runs sampled)
-stringify new buf: get x 548,044 ops/sec ±0.58% (94 runs sampled)
-stringify old buf: get x 1,353,637 ops/sec ±0.45% (87 runs sampled)
+ ∴  bench (master) : node index.js
+client-server-local.bench.js (1/5)
+put x 54,369 ops/sec ±1.75% (94 runs sampled)
+get x 56,759 ops/sec ±1.39% (93 runs sampled)
 
-stringify str:     put x 596,660 ops/sec ±0.38% (93 runs sampled)
-stringify new buf: put x 338,863 ops/sec ±0.35% (96 runs sampled)
-stringify old buf: put x 1,157,951 ops/sec ±0.51% (95 runs sampled)
-```
+client-server-tcp.bench.js (2/5)
+put x 56,506 ops/sec ±1.98% (80 runs sampled)
+get x 54,801 ops/sec ±1.83% (89 runs sampled)
 
-```bash
- ∴  bench (master) : node parse.bench.js 
-parse: get x 1,979,999 ops/sec ±0.31% (94 runs sampled)
-parse: put x 1,315,728 ops/sec ±0.33% (83 runs sampled)
+levelup.bench.js (3/5)
+put x 119,362 ops/sec ±1.53% (78 runs sampled)
+
+parse.bench.js (4/5)
+get x 1,412,276 ops/sec ±0.57% (94 runs sampled)
+put x 1,090,251 ops/sec ±0.38% (88 runs sampled)
+
+stringify.bench.js (5/5)
+get x 787,139 ops/sec ±0.58% (96 runs sampled)
+put x 564,162 ops/sec ±0.31% (89 runs sampled)
 ```

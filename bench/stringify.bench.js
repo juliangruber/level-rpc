@@ -1,14 +1,13 @@
 var stringify = require('../stringify');
-var stringifyBuf = stringify.buffer;
 var Benchmark = require('benchmark');
 
 var suite = new Benchmark.Suite;
 
 suite
-  .add('stringify str: get', function () {
+  .add('get', function () {
     stringify(10, 13, ['foo'])
   })
-  .add('stringify str: put', function () {
+  .add('put', function () {
     stringify(20, 13, ['foo', 'bar'])
   })
   .on('cycle', function (ev) {

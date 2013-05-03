@@ -10,10 +10,10 @@ var get = stringify(10, 13, ['foo']);
 var put = stringify(20, 13, ['foo', 'bar']);
 
 suite
-  .add('parse: get', function () {
+  .add('get', function () {
     parser.write(get);
   })
-  .add('parse: put', function () {
+  .add('put', function () {
     parser.write(put);
   })
   .on('cycle', function (ev) {
