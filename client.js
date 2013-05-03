@@ -36,8 +36,8 @@ Client.prototype.createRPCStream = function () {
   });
 
   self.on('op', function (method, cb, args) {
-    out.write(stringify(methods[method], self.nextId, args));
     self.callbacks[self.nextId] = cb;
+    out.write(stringify(methods[method], self.nextId, args));
     self.nextId++;
   });
 
