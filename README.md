@@ -7,6 +7,43 @@ Super fast rpc mechanism for LevelUp
 
 [![browser support](https://ci.testling.com/juliangruber/level-rpc.png)](https://ci.testling.com/juliangruber/level-rpc)
 
+## Usage
+
+Fire up a server:
+
+```js
+var net = require('net');
+var Server = require('level-rpc').Server;
+
+var server = new Server('/tmp/db');
+
+net.createServer(function (con) {
+  con.pipe(server.createStream()).pipe(con);
+}).listen(8999);
+```
+
+And connect to it from a client:
+
+```js
+var net = require('net');
+var Client = require('level-rpc').Client;
+
+var db = new Client();
+
+var rpcStream = db.createRPCStream();
+rpcStream.pipe(net.connect(8999)).pipe(rpcStream);
+
+db.put('foo', 'bar', function (err) {
+  if (err) throw err;
+  
+  db.get('foo', function (err, value) {
+    if (err) throw err;
+    console.log(value);
+    // => bar
+  })
+});
+```
+
 ## Status
 
 * `[X]` stringify
