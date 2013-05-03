@@ -54,6 +54,12 @@ function parse () {
           offset += 1;
         }
 
+        if (fieldLength === 0) {
+          fieldLength = null;
+          field = null;
+          continue;
+        }
+
         if (field === null) {
           if (len < fieldLength + offset) break;
           var fieldEnd = fieldLength + offset;
