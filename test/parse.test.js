@@ -8,11 +8,11 @@ test('parse', function (t) {
   parser.on('data', function (data) {
     t.equal(data[0], 20, 'method');
     t.equal(data[1], 13, 'id');
-    t.deepEqual(data[2], ['foo', 'bar']);
+    t.deepEqual(data[2], [undefined, 'foo', 'bar']);
 
     t.end();
   });
 
-  parser.write(stringify(20, 13, ['foo', 'bar', undefined]));
+  parser.write(stringify(20, 13, [undefined, 'foo', 'bar']));
   parser.end();
 });

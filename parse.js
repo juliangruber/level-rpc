@@ -55,6 +55,7 @@ function parse () {
         }
 
         if (fieldLength === 0) {
+          fields.push(undefined);
           fieldLength = null;
           field = null;
           continue;
