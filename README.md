@@ -84,7 +84,7 @@ db.put('foo', 'bar', function (err) {
 `GET` response:
 
 ```
-| 11    | CB ID  | 2     | ERRLENGTH | ERR  | VALUELENGTH | VALUE |
+| 0     | CB ID  | 2     | ERRLENGTH | ERR  | VALUELENGTH | VALUE |
 | UINT8 | UINT32 | UINT8 | UINT8     | UTF8 | UINT8       | UTF8  |
 ```
 
@@ -98,7 +98,7 @@ db.put('foo', 'bar', function (err) {
 `PUT` response:
 
 ```
-| 21    | CB ID  | 1     | ERRLENGTH | ERR  |
+| 0     | CB ID  | 1     | ERRLENGTH | ERR  |
 | UINT8 | UINT32 | UINT8 | UINT8     | UTF8 |
 ```
 
