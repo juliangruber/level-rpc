@@ -12,8 +12,8 @@ function stringify (method, id, fields) {
   var offset = 0;
 
   for (var i = 0; i < fields.length; i++) {
-    // 1 = fieldlength
-    length += 1 + fields[i].length;
+    length += 1; // fieldlength
+    if (typeof fields[i] !== 'undefined') length += fields[i].length;
   }
 
   var buf = new Buffer(length);
@@ -23,8 +23,12 @@ function stringify (method, id, fields) {
   buf.writeUInt8(fields.length, 5); offset += 1;
 
   for (var i = 0; i < fields.length; i++) {
-    buf.writeUInt8(fields[i].length, offset); offset += 1;
-    buf.write(fields[i], offset); offset += fields[i].length;
+    if (typeof fields[i] === 'undefined') {
+      buf.writeUInt8(0, offset); offset += 1;
+    } else {
+      buf.writeUInt8(fields[i].length, offset); offset += 1;
+      buf.write(fields[i], offset); offset += fields[i].length;
+    }
   }
 
   return buf;
