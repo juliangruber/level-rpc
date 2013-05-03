@@ -22,23 +22,21 @@ Server.prototype.createStream = function () {
 
   var parser = parse();
   var out = through();
-  var stream = duplex(parse, out);
+  var stream = duplex(parser, out);
   
-  parse.on('data', function (op) {
+  parser.on('data', function (op) {
     var method = op[0];
     var id = op[1];
     var args = op[2];
 
-    if (method == 10) { // GET
-      args.push(function cb (err) {
-        out.write(stringify(
-          11,
-          id,
-          [err? err.toString() || '']
-        ));
+    args.push(function cb () {
+      var args = [].slice.call(arguments).map(function (arg) {
+        if (arg == null) return undefined;
+        return String(arg);
       });
-      db.get.apply(db, args);
-    }
+      out.write(stringify(0, id, args));
+    });
+    db[methods[method]].apply(db, args);
   })
     
   return stream;

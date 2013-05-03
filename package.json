@@ -1,7 +1,7 @@
 {
   "name": "level-rpc",
   "description": "Super fast rpc mechanism for LevelUp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/juliangruber/level-rpc.git"
@@ -12,7 +12,9 @@
     "test": "tap test/*.js"
   },
   "dependencies": {
-    "through": "~2.3.4"
+    "through": "~2.3.4",
+    "duplexer": "~0.1.1",
+    "levelup": "~0.8.0"
   },
   "devDependencies": {
     "tap": "*",
@@ -32,15 +34,16 @@
     "url": "http://juliangruber.com"
   },
   "license": "MIT",
-  "testling" : {
-    "files" : "test/*.js",
-    "browsers" : [
+  "testling": {
+    "files": "test/*.js",
+    "browsers": [
       "ie/6..latest",
       "chrome/20..latest",
       "firefox/13..latest",
       "safari/5.0.5..latest",
       "opera/11.0..latest",
-      "iphone/6", "ipad/6"
+      "iphone/6",
+      "ipad/6"
     ]
   }
 }

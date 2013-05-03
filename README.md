@@ -13,10 +13,11 @@ Super fast rpc mechanism for LevelUp
 * `[X]` parse
 * `[X]` string encoding
 * `[ ]` buffer encoding
-* `[ ]` rpc server
-* `[ ]` rpc client
-* `[ ]` `db#get(key, cb)`
-* `[ ]` `db#put(key, value, cb)`
+* `[X]` rpc server
+* `[X]` rpc client
+* `[ ]` reconnection logic
+* `[X]` `db#get(key, cb)`
+* `[X]` `db#put(key, value, cb)`
 * `[ ]` `db#del(key, cb)`
 * `[ ]` `db#batch(opts, cb)`
 * `[ ]` `db#create*Stream()`
