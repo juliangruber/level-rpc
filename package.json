@@ -35,7 +35,7 @@
   },
   "license": "MIT",
   "testling": {
-    "files": "test/*.js",
+    "files": "test/{client,parse,stringify}.test.js",
     "browsers": [
       "ie/6..latest",
       "chrome/20..latest",
