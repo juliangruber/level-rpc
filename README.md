@@ -55,7 +55,7 @@ db.put('foo', 'bar', function (err) {
 * `[ ]` reconnection logic
 * `[X]` `db#get(key, cb)`
 * `[X]` `db#put(key, value, cb)`
-* `[ ]` `db#del(key, cb)`
+* `[X]` `db#del(key, cb)`
 * `[ ]` `db#batch(opts, cb)`
 * `[ ]` `db#create*Stream()`
 * `[ ]` `db#approximateSize()`

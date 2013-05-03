@@ -53,3 +53,8 @@ Client.prototype.put = function (key, value, cb) {
   if (!cb) cb = function () {};
   this.emit('op', 'put', cb, [key, value]);
 }
+
+Client.prototype.del = function (key, cb) {
+  if (!cb) cb = function () {};
+  this.emit('op', 'del', cb, [key]);
+}

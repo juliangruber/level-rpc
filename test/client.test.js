@@ -38,3 +38,23 @@ test('client put', function (t) {
     t.error(err, 'no error');
   });
 });
+
+test('client del', function (t) {
+  t.plan(2);
+
+  var db = new Client();
+  var rpcStream = db.createRPCStream();
+  
+  rpcStream.on('data', function (chunk) {
+    t.equals(
+      chunk.toString(),
+      stringify(3, 0, ['foo']).toString(),
+      'out'
+    );
+    rpcStream.write(stringify(0, 0, []));
+  });
+
+  db.del('foo', function (err) {
+    t.error(err, 'no error');
+  });
+});
