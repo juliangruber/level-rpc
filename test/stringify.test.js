@@ -3,54 +3,20 @@ var stringifyBuf = stringify.buffer;
 var Buffer = require('buffer').Buffer;
 var test = require('tape');
 
-test('stringify str: get', function (t) {
-  var buf = stringify(13, 'get', 'key');
+test('stringify', function (t) {
+  var buf = stringify(10, 13, ['key', 'value']);
 
-  t.equals(buf.readUInt32LE(0), 13, 'id');
-  t.equals(buf.readUInt8(4), 0, 'method');
-  t.equals(buf.readUInt8(5), 3, 'key length');
-  t.equals(buf.toString('utf8', 6, 9), 'key', 'key');
-  t.equals(buf.length, 9, 'msg length');
+  // ME : ID : FC : L1 : F1  : L2 : F2
+  // 10 : 13 : 02 : 03 : key : 05 : value
 
-  t.end();
-});
-
-test('stringify buf: get', function (t) {
-  var buf = stringifyBuf(13, 'key', new Buffer('key'));
-
-  t.equals(buf.readUInt32LE(0), 13, 'id');
-  t.equals(buf.readUInt8(4), 0, 'method');
-  t.equals(buf.readUInt8(5), 3, 'key length');
-  t.equals(buf.toString('utf8', 6, 9), 'key', 'key');
-  t.equals(buf.length, 9, 'msg length');
-
-  t.end();
-});
-
-test('stringify str: put', function (t) {
-  var buf = stringify(13, 'put', 'key', 'value');
-
-  t.equals(buf.readUInt32LE(0), 13, 'id');
-  t.equals(buf.readUInt8(4), 1, 'method');
-  t.equals(buf.readUInt8(5), 3, 'key length');
-  t.equals(buf.toString('utf8', 6, 9), 'key', 'key');
-  t.equals(buf.readUInt8(9), 5, 'value length');
-  t.equals(buf.toString('utf8', 10, 15), 'value', 'value');
-  t.equals(buf.length, 15, 'msg length');
-
-  t.end();
-});
-
-test('stringify buf: put', function (t) {
-  var buf = stringifyBuf(13, 'put', new Buffer('key'), new Buffer('value'));
-
-  t.equals(buf.readUInt32LE(0), 13, 'id');
-  t.equals(buf.readUInt8(4), 1, 'method');
-  t.equals(buf.readUInt8(5), 3, 'key length');
-  t.equals(buf.toString('utf8', 6, 9), 'key', 'key');
-  t.equals(buf.readUInt8(9), 5, 'value length');
-  t.equals(buf.toString('utf8', 10, 15), 'value', 'value');
-  t.equals(buf.length, 15, 'msg length');
+  t.equals(buf.readUInt8(0), 10, 'method');
+  t.equals(buf.readUInt32LE(1), 13, 'id');
+  t.equals(buf.readUInt8(5), 2, 'field count');
+  t.equals(buf.readUInt8(6), 3, 'key length');
+  t.equals(buf.toString('utf8', 7, 10), 'key', 'key');
+  t.equals(buf.readUInt8(10), 5, 'value length');
+  t.equals(buf.toString('utf8', 11, 16), 'value', 'value');
+  t.equals(buf.length, 16, 'msg length');
 
   t.end();
 });

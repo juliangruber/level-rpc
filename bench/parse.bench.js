@@ -6,8 +6,8 @@ var suite = new Benchmark.Suite;
 
 var parser = new parse();
 
-var get = stringify(13, 'get', 'foo');
-var put = stringify(13, 'put', 'foo', 'bar');
+var get = stringify(10, 13, ['foo']);
+var put = stringify(20, 13, ['foo', 'bar']);
 
 suite
   .add('parse: get', function () {

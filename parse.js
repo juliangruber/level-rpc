@@ -7,15 +7,15 @@ function parse () {
   var buf = null;
   var offset = 0;
 
-  var id, method, keyLength, key, valueLength, value;
+  var method, id, fieldCount, fieldLength, field, fields;
 
   function reset () {
-    id = null;
     method = null;
-    keyLength = null;
-    key = null;
-    valueLength = null;
-    value = null;
+    id = null;
+    fieldCount = null;
+    fieldLength = null;
+    field = null;
+    fields = [];
   }
 
   reset();
@@ -29,49 +29,43 @@ function parse () {
     }
 
     while (true) {
+      if (method === null) {
+        if (len < 1 + offset) break;
+        method = chunk.readUInt8(offset);
+        offset += 1;
+      }
+
       if (id === null) {
         if (len < 4 + offset) break;
         id = chunk.readUInt32LE(offset);
         offset += 4;
       }
 
-      if (method === null) {
+      if (fieldCount === null) {
         if (len < 1 + offset) break;
-        method = chunk.readUInt8(offset) === 0
-          ? 'get'
-          : 'put';
+        fieldCount = chunk.readUInt8(offset);
         offset += 1;
       }
 
-      if (keyLength === null) {
-        if (len < 1 + offset) break;
-        keyLength = chunk.readUInt8(offset);
-        offset += 1;
-      }
-
-      if (key === null) {
-        if (len < keyLength + offset) break;
-        var keyEnd = keyLength + offset;
-        key = chunk.toString('utf8', offset, keyEnd);
-        offset = keyEnd;
-      }
-
-      if (method === 'put') {
-        if (valueLength === null) {
+      while (fields.length < fieldCount) {
+        if (fieldLength === null) {
           if (len < 1 + offset) break;
-          valueLength = chunk.readUInt8(offset);
+          fieldLength = chunk.readUInt8(offset);
           offset += 1;
         }
 
-        if (value === null) {
-          if (len < valueLength + offset) break;
-          var valueEnd = valueLength + offset;
-          value = chunk.toString('utf8', offset, valueEnd);
-          offset = valueEnd;
+        if (field === null) {
+          if (len < fieldLength + offset) break;
+          var fieldEnd = fieldLength + offset;
+          field = chunk.toString('utf8', offset, fieldEnd);
+          offset = fieldEnd;
+          fields.push(field);
+          fieldLength = null;
+          field = null;
         }
       }
 
-      this.queue([id, method, key, value]);
+      this.queue([method, id, fields]);
 
       reset();
     }

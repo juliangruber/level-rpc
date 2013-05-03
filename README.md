@@ -29,40 +29,42 @@ Super fast rpc mechanism for LevelUp
 ## Protocol
 
 ```
-| METHOD | CB / STREAM ID | xLENGTH | x | ...
+| METHOD | CB ID | FIELDCOUNT | F1LENGTH | F1 | ...
 ```
 
-### GET
+`METHOD = {METHOD}{EVENT}`, e.g. `10` for `{GET}{REQUEST}`.
 
-Request
+### Examples
 
-```
-| 0     | CB ID  | KEYLENGTH | KEY  |
-| UINT8 | UINT32 | UINT8     | UTF8 |
-```
-
-Response
+`GET` request:
 
 ```
-| 2     | CB ID  | ERRLENGTH | ERR  | VALUELENGTH | VALUE |
-| UINT8 | UINT32 | UINT8     | UTF8 | UINT8       | UTF8  |
+| 10    | CB ID  | 1     | KEYLENGTH | KEY  |
+| UINT8 | UINT32 | UINT8 | UINT8     | UTF8 |
 ```
 
-### PUT
-
-Request
+`GET` response:
 
 ```
-| 1     | CB ID  | KEYLENGTH | KEY  | VALUELENGTH | VALUE |
-| UINT8 | UINT32 | UINT8     | UTF8 | UINT8       | UTF8  |
+| 11    | CB ID  | 2     | ERRLENGTH | ERR  | VALUELENGTH | VALUE |
+| UINT8 | UINT32 | UINT8 | UINT8     | UTF8 | UINT8       | UTF8  |
 ```
 
-Response
+`PUT` request:
 
 ```
-| 3     | CB ID  | ERRLENGTH | ERR  |
-| UINT8 | UINT32 | UINT8     | UTF8 |
+| 20    | CB ID  | 2     | KEYLENGTH | KEY  | VALUELENGTH | VALUE |
+| UINT8 | UINT32 | UINT8 | UINT8     | UTF8 | UINT8       | UTF8  |
 ```
+
+`PUT` response:
+
+```
+| 21    | CB ID  | 1     | ERRLENGTH | ERR  |
+| UINT8 | UINT32 | UINT8 | UINT8     | UTF8 |
+```
+
+
 
 ## Benchmarks
 

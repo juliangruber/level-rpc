@@ -8,21 +8,19 @@ test('parse', function (t) {
   var i = 0;
   parser.on('data', function (data) {
     if (i++ == 0) {
-      t.equal(data[0], 13, 'id');
-      t.equal(data[1], 'get', 'method');
-      t.equal(data[2], 'foo');
-      t.equal(data[3], null, 'value');
+      t.equal(data[0], 10, 'method');
+      t.equal(data[1], 13, 'id');
+      t.deepEqual(data[2], ['foo']);
     } else {
-      t.equal(data[0], 13, 'id');
-      t.equal(data[1], 'put', 'method');
-      t.equal(data[2], 'foo');
-      t.equal(data[3], 'bar');
+      t.equal(data[0], 20, 'method');
+      t.equal(data[1], 13, 'id');
+      t.deepEqual(data[2], ['foo', 'bar']);
 
       t.end();
     }
   });
 
-  parser.write(stringify(13, 'get', 'foo'));
-  parser.write(stringify(13, 'put', 'foo', 'bar'));
+  parser.write(stringify(10, 13, ['foo']));
+  parser.write(stringify(20, 13, ['foo', 'bar']));
   parser.end();
 });
