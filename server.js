@@ -31,11 +31,11 @@ Server.prototype.createStream = function () {
 
     args.push(function cb () {
       var args = [].slice.call(arguments).map(function (arg) {
-        if (arg == null) return undefined;
-        return String(arg);
+        if (arg !== null) return arg.toString();
       });
       out.write(stringify(0, id, args));
     });
+
     db[methods[method]].apply(db, args);
   })
     
