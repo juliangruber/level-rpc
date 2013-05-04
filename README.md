@@ -70,14 +70,12 @@ db.put('foo', 'bar', function (err) {
 | METHOD | CB ID | FIELDCOUNT | F1LENGTH | F1 | ...
 ```
 
-`METHOD = {METHOD}{EVENT}`, e.g. `10` for `{GET}{REQUEST}`.
-
 ### Examples
 
 `GET` request:
 
 ```
-| 10    | CB ID  | 1     | KEYLENGTH | KEY  |
+| 1     | CB ID  | 1     | KEYLENGTH | KEY  |
 | UINT8 | UINT32 | UINT8 | UINT8     | UTF8 |
 ```
 
@@ -91,7 +89,7 @@ db.put('foo', 'bar', function (err) {
 `PUT` request:
 
 ```
-| 20    | CB ID  | 2     | KEYLENGTH | KEY  | VALUELENGTH | VALUE |
+| 2     | CB ID  | 2     | KEYLENGTH | KEY  | VALUELENGTH | VALUE |
 | UINT8 | UINT32 | UINT8 | UINT8     | UTF8 | UINT8       | UTF8  |
 ```
 
@@ -101,8 +99,6 @@ db.put('foo', 'bar', function (err) {
 | 0     | CB ID  | 1     | ERRLENGTH | ERR  |
 | UINT8 | UINT32 | UINT8 | UINT8     | UTF8 |
 ```
-
-
 
 ## Benchmarks
 
