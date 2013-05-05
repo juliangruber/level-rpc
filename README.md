@@ -103,23 +103,24 @@ db.put('foo', 'bar', function (err) {
 ## Benchmarks
 
 ```bash
- ∴  bench (master) : node index.js
+ ∴  level-rpc (master) : node bench/
 client-server-local.bench.js (1/5)
-put x 54,369 ops/sec ±1.75% (94 runs sampled)
-get x 56,759 ops/sec ±1.39% (93 runs sampled)
+put 26502 ops/s
+get 25773 ops/s
 
 client-server-tcp.bench.js (2/5)
-put x 56,506 ops/sec ±1.98% (80 runs sampled)
-get x 54,801 ops/sec ±1.83% (89 runs sampled)
+put 9268 ops/s
+get 9497 ops/s
 
 levelup.bench.js (3/5)
-put x 119,362 ops/sec ±1.53% (78 runs sampled)
+put 51282 ops/s
+get 64516 ops/s
 
 parse.bench.js (4/5)
-get x 1,412,276 ops/sec ±0.57% (94 runs sampled)
-put x 1,090,251 ops/sec ±0.38% (88 runs sampled)
+get 1153846 ops/s
+put 1153846 ops/s
 
 stringify.bench.js (5/5)
-get x 787,139 ops/sec ±0.58% (96 runs sampled)
-put x 564,162 ops/sec ±0.31% (89 runs sampled)
+get 681818 ops/s
+put 566038 ops/s
 ```

@@ -1,16 +1,14 @@
 var stringify = require('../stringify');
-var Benchmark = require('benchmark');
+var ben = require('ben');
 
-var suite = new Benchmark.Suite;
+var ms = ben(30000, function () {
+  stringify(10, 13, ['foo'])
+});
 
-suite
-  .add('get', function () {
-    stringify(10, 13, ['foo'])
-  })
-  .add('put', function () {
-    stringify(20, 13, ['foo', 'bar'])
-  })
-  .on('cycle', function (ev) {
-    console.log(String(ev.target));
-  })
-  .run({ async : true });
+console.log('get %s ops/s', Math.round(1000/ms));
+
+ms = ben(30000, function () {
+  stringify(20, 13, ['foo', 'bar'])
+});
+
+console.log('put %s ops/s', Math.round(1000/ms));

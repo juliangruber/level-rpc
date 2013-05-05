@@ -19,7 +19,6 @@
   "devDependencies": {
     "tap": "*",
     "tape": "~0.3.3",
-    "benchmark": "~1.0.0",
     "ben": "0.0.0"
   },
   "keywords": [

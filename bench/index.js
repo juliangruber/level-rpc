@@ -3,7 +3,7 @@ var spawn = require('child_process').spawn;
 var path = require('path');
 
 var files = fs.readdirSync(__dirname).filter(function (name) {
-  return !/(\.sw[a-z]|db|index\.js)$/.test(name);
+  return !/(\.sw[a-z]|db|index\.js|util\.js)$/.test(name);
 });
 
 (function next (i) {
