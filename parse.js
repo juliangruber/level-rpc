@@ -79,8 +79,7 @@ function parse () {
 
     if (len != offset) {
       var dif = Math.abs(len - offset)
-      buf = new Buffer(dif)
-      chunk.copy(buf, 0, len - dif)
+      buf = chunk.slice(len - dif);
     }
 
     offset = 0;
