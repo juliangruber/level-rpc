@@ -1,5 +1,6 @@
-
 # level-rpc
+
+**This module is DEPRECATED. Just use [multilevel](https://github.com/juliangruber/multilevel), it's nearly as fast and supports binary data.**
 
 Super fast rpc mechanism for LevelUp
 
